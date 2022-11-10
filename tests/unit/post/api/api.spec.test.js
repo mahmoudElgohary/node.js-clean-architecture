@@ -51,8 +51,8 @@ describe('API', () => {
     });
   });
 
-  describe('GET /api/v1/post/:id', () => {
-    it('should return a specific post', (done) => {
+  describe('GET /api/v1/userType/:id', () => {
+    it('should return a specific userType', (done) => {
       const obj = posts.single.success;
       getStub.yields(null, obj.res, JSON.stringify(obj.body));
       request.get(
@@ -67,7 +67,7 @@ describe('API', () => {
         }
       );
     });
-    it('should throw an error if the post does not exist', (done) => {
+    it('should throw an error if the userType does not exist', (done) => {
       const obj = posts.single.failure;
       getStub.yields(null, obj.res, JSON.stringify(obj.body));
       request.get(
@@ -77,7 +77,7 @@ describe('API', () => {
           res.headers['content-type'].should.contain('application/json');
           body = JSON.parse(body);
           body.status.should.eql('error');
-          body.message.should.eql('That post does not exist.');
+          body.message.should.eql('That userType does not exist.');
           done();
         }
       );
@@ -85,7 +85,7 @@ describe('API', () => {
   });
 
   describe('POST /api/v1/posts', () => {
-    it('should return the post that was added', (done) => {
+    it('should return the userType that was added', (done) => {
       const options = {
         body: {
           isPublished: false,
@@ -111,7 +111,7 @@ describe('API', () => {
   });
 
   describe('PUT /api/v1/posts', () => {
-    it('should return the post that was updated', (done) => {
+    it('should return the userType that was updated', (done) => {
       const options = {
         body: { description: 'description3updated' },
         json: true,

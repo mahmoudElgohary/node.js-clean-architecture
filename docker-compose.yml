@@ -23,7 +23,7 @@ services:
     ports:
       - 1234:1234
     environment:
-      - MONGO_URL=mongodb://mongo-database:27017/post-clean-code
+      - MONGO_URL=mongodb://mongo-database:27017/userType-clean-code
       - REDIS_URL=redis://redis-database:6379
     depends_on:
       - mongo-database

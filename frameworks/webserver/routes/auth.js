@@ -1,8 +1,9 @@
 import authController from '../../../adapters/controllers/authController';
 import userDbRepository from '../../../application/repositories/userDbRepository';
-import userDbRepositoryMongoDB from '../../database/mongoDB/repositories/userRepositoryMongoDB';
+import userDbRepositoryMongoDB from '../../database/mysql/repositories/userRepository';
 import authServiceInterface from '../../../application/services/authService';
 import authServiceImpl from '../../services/authService';
+const ControllerCallback=require('../middlewares/controllerCallback.js')
 
 export default function authRouter(express) {
   const router = express.Router();
@@ -16,7 +17,7 @@ export default function authRouter(express) {
   );
 
   // POST enpdpoints
-  router.route('/').post(controller.loginUser);
+  router.route('/').post(ControllerCallback(controller.loginUser));
 
   return router;
 }

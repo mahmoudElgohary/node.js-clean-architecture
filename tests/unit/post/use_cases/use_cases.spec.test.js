@@ -3,11 +3,11 @@ import chai from 'chai';
 import sinon from 'sinon';
 import faker from 'faker';
 
-import post from '../../../../src/entities/post';
-import addPost from '../../../../application/use_cases/post/add';
-import findAll from '../../../../application/use_cases/post/findAll';
-import findById from '../../../../application/use_cases/post/findById';
-import postDbRepository from '../../../../application/repositories/postDbRepository';
+import userType from '../../../../src/entities/userType';
+import addUserType from '../../../../application/use_cases/userType/add';
+import findAll from '../../../../application/use_cases/userType/findAll';
+import findById from '../../../../application/use_cases/userType/findById';
+import postDbRepository from '../../../../application/repositories/userTypeDbRepository';
 
 const { expect } = chai;
 
@@ -18,8 +18,8 @@ describe('Use cases', () => {
     dbRepository = postDbRepository();
   });
 
-  describe('Fetch a specific post', () => {
-    it('should fetch a post by id', () => {
+  describe('Fetch a specific userType', () => {
+    it('should fetch a userType by id', () => {
       const stubPost = {
         title: faker.name.findName(),
         description: faker.name.findName(),
@@ -27,7 +27,7 @@ describe('Use cases', () => {
         isPublished: false,
         userId: faker.random.uuid()
       };
-      const correspondingPost = post({
+      const correspondingPost = userType({
         title: stubPost.title,
         description: stubPost.description,
         createdAt: stubPost.createdAt,
@@ -59,8 +59,8 @@ describe('Use cases', () => {
     });
   });
 
-  describe('Add new post', () => {
-    it('should add a new post succesfully', () => {
+  describe('Add new userType', () => {
+    it('should add a new userType succesfully', () => {
       const stubValue = {
         title: faker.name.findName(),
         description: faker.name.findName(),
@@ -68,7 +68,7 @@ describe('Use cases', () => {
         isPublished: false,
         userId: faker.random.uuid()
       };
-      const pesristedPost = post({
+      const pesristedPost = userType({
         title: stubValue.title,
         description: stubValue.description,
         createdAt: stubValue.createdAt,
@@ -78,7 +78,7 @@ describe('Use cases', () => {
       const stubRepositoryAdd = sinon
         .stub(dbRepository, 'add')
         .returns(pesristedPost);
-      const newPost = addPost({
+      const newPost = addUserType({
         title: stubValue.title,
         description: stubValue.description,
         createdAt: stubValue.createdAt,

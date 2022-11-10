@@ -3,6 +3,8 @@ import findByProperty from '../../application/use_cases/user/findByProperty';
 import countAll from '../../application/use_cases/user/countAll';
 import findById from '../../application/use_cases/user/findById';
 
+const { headers } = require('../../config/config');
+
 export default function userController(
   userDbRepository,
   userDbRepositoryImpl,
@@ -35,30 +37,48 @@ export default function userController(
         response.totalItems = totalItems;
         response.totalPages = Math.ceil(totalItems / params.perPage);
         response.itemsPerPage = params.perPage;
-        return res.json(response);
+        return {
+          headers,
+          statusCode: 200,
+          body: {
+            data: response
+          }
+        };
       })
-      .catch((error) => next(error));
+      .catch((error) => error);
   };
 
   const fetchUserById = (req, res, next) => {
     findById(req.params.id, dbRepository)
       .then((user) => res.json(user))
-      .catch((error) => next(error));
+      .catch((error) => error);
   };
 
-  const addNewUser = (req, res, next) => {
+  const addNewUser = async (req) => {
     const { username, password, email, role, createdAt } = req.body;
-    addUser(
-      username,
-      password,
-      email,
-      role,
-      createdAt,
-      dbRepository,
-      authService
-    )
-      .then((user) => res.json(user))
-      .catch((error) => next(error));
+
+    try {
+      const [user] = await Promise.all([
+        addUser(
+          username,
+          password,
+          email,
+          role,
+          createdAt,
+          dbRepository,
+          authService
+        )
+      ]);
+      return {
+        headers,
+        statusCode: 200,
+        body: {
+          data: user
+        }
+      };
+    } catch (e) {
+      throw e;
+    }
   };
 
   return {

@@ -61,7 +61,7 @@ export default {
       },
       body: {
         status: 'error',
-        message: 'That post does not exist.'
+        message: 'That userType does not exist.'
       }
     }
   },

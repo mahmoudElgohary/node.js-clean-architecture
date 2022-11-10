@@ -1,6 +1,7 @@
-export default function postRepository(repository) {
+export default function userTypeRepository(repository) {
   const findAll = (params) => repository.findAll(params);
   const countAll = (params) => repository.countAll(params);
+  const findAndCountAll = (params) => repository.findAndCountAll(params);
   const findById = (id) => repository.findById(id);
   const add = (post) => repository.add(post);
   const updateById = (id, post) => repository.updateById(id, post);
@@ -11,6 +12,7 @@ export default function postRepository(repository) {
     countAll,
     findById,
     add,
+    findAndCountAll,
     updateById,
     deleteById
   };

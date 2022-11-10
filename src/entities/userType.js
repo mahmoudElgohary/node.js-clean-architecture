@@ -1,15 +1,13 @@
-export default function post({
+export default function userType({
   title,
   description,
   createdAt,
-  isPublished = false,
-  userId
+  deleted = false
 }) {
   return {
     getTitle: () => title,
     getDescription: () => description,
     getCreatedAt: () => createdAt,
-    isPublished: () => isPublished,
-    getUserId: () => userId
+    isDeleted: () => deleted
   };
 }

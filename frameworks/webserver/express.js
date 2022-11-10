@@ -1,4 +1,3 @@
-import morgan from 'morgan';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
@@ -33,5 +32,4 @@ export default function expressConfig(app) {
     // Pass to next layer of middleware
     next();
   });
-  app.use(morgan('combined'));
 }
